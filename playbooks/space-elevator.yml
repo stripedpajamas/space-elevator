@@ -12,4 +12,5 @@
     - common
     - ssh
     - ufw
+    - spaceman
 ...

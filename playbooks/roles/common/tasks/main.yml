@@ -23,9 +23,9 @@
     purge: yes
     autoremove: yes
 
-- name: Perform a full system upgrade
-  apt:
-    upgrade: "safe"
+# - name: Perform a full system upgrade
+#   apt:
+#     upgrade: "safe"
 
 - name: Generate the unattended-upgrades templates to enable automatic security updates
   template:

@@ -1,0 +1,16 @@
+---
+- name: Create Spaceman User
+  user:
+    name: spaceman
+    comment: Space Man
+    groups: sudo
+
+- name: Set the local_pub_ssh_key variable to the value provided by a 'genesis' role if one is defined
+  set_fact:
+    local_pub_ssh_key: "{{ hostvars['127.0.0.1']['local_pub_ssh_key'] }}"
+  when: hostvars['127.0.0.1']['local_pub_ssh_key'] is defined
+
+- name: Authorizing SSH login for Spaceman User
+  authorized_key:
+    user: spaceman
+    key: "{{ local_pub_ssh_key }}"

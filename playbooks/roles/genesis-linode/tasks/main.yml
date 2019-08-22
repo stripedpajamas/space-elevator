@@ -37,3 +37,7 @@
 - name: "Set the space_server_name variable"
   set_fact:
     space_server_name: "{{ linode_server_name | regex_replace('\\s', '_') }}"
+
+- name: "Set the local SSH public key variable"
+  set_fact:
+    local_pub_ssh_key: "{{ ssh_key.stdout }}"
