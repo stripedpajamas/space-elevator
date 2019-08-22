@@ -1,0 +1,15 @@
+---
+- import_playbook: python.yml
+
+- name: Configure the Server and install required software
+# ========================================================
+  hosts: spacehost
+
+  remote_user: "root"
+  become: true
+
+  roles:
+    - common
+    - ssh
+    - ufw
+...
