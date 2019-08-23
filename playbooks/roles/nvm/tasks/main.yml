@@ -1,0 +1,16 @@
+---
+- name: Install NVM
+  shell: >
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+  args:
+    executable: "/bin/bash"
+    creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
+
+- name: Install Node v10.16.3 and SSB-Server
+  shell: >
+    export NVM_DIR="$HOME/.nvm";
+    . $NVM_DIR/nvm.sh;
+    nvm install v10.16.3;
+    npm install -g ssb-server;
+  args:
+    executable: "/bin/bash"

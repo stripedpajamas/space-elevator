@@ -1,0 +1,11 @@
+---
+
+- name: Install SSB deps and initialize SSB Server
+# ========================================================
+  hosts: spacehost
+  remote_user: "spaceman"
+
+  roles:
+    - nvm
+    - ssb
+...

@@ -59,7 +59,7 @@ function run_genesis() {
   fi
   
   # Run the specified genesis playbook with the specified Ansible inventory
-  echo; echo; ansible-playbook \
+  echo; echo; ansible-playbook -vv \
     -i inventories/inventory \
     --extra-vars="@$GLOBAL_VARS" \
     --extra-vars="@$DEFAULT_SITE_VARS" \

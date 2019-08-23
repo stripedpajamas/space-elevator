@@ -1,9 +1,23 @@
 ---
+- name: Make sure we have an elevators group
+  group:
+    name: elevators
+    state: present
+
+- name: Allow elevators group to have passwordless sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%elevators'
+    line: '%elevators ALL=(ALL) NOPASSWD: ALL'
+    validate: visudo -cf %s
+
 - name: Create Spaceman User
   user:
     name: spaceman
     comment: Space Man
-    groups: sudo
+    shell: "/bin/bash"
+    groups: elevators
 
 - name: Set the local_pub_ssh_key variable to the value provided by a 'genesis' role if one is defined
   set_fact:

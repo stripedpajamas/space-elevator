@@ -1,0 +1,24 @@
+---
+- name: Create ssb-service directory
+  shell: >
+    mkdir -p "{{ ansible_env.HOME }}/ssb-service"
+  args:
+    executable: "/bin/bash"
+
+- name: Copy server runner for service creation
+  copy:
+    src: run.sh
+    dest: "{{ ansible_env.HOME }}/ssb-service/run.sh"
+    owner: spaceman
+    group: spaceman
+    mode: 0777
+
+- name: Install SSB as a system service
+  copy:
+    src: ssb.service
+    dest: /etc/systemd/system/ssb.service
+    owner: root
+    group: root
+    mode: 0644
+  become: yes
+  notify: Restart SSB

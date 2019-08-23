@@ -1,0 +1,12 @@
+[Unit]
+Description=SSB Server Service
+[Service]
+User=spaceman
+WorkingDirectory=/home/spaceman/ssb-service
+ExecStart=/home/spaceman/ssb-service/run.sh
+SuccessExitStatus=143
+TimeoutStopSec=10
+Restart=on-failure
+RestartSec=5
+[Install]
+WantedBy=multi-user.target

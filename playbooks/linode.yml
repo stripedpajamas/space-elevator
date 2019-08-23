@@ -53,4 +53,5 @@
 
 - import_playbook: ssh-setup.yml
 - import_playbook: space-elevator.yml
+- import_playbook: ssb-setup.yml
 ...

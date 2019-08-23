@@ -1,0 +1,6 @@
+---
+- name: Restart SSB
+  service:
+    name: ssb
+    state: restarted
+  become: yes
