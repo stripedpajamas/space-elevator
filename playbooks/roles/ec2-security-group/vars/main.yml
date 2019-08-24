@@ -1,0 +1,2 @@
+---
+aws_security_group: "space-elevator-{{ aws_instance_name }}"

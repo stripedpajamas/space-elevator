@@ -1,7 +1,4 @@
 ---
-- set_fact:
-    genesis_role: "genesis-linode"
-
 - name: "Get the {{ ssh_private_key }}.pub contents"
   command: "cat {{ ssh_private_key }}.pub"
   register: ssh_key

@@ -4,6 +4,7 @@
 # ========================================================
   hosts: spacehost
   remote_user: "spaceman"
+  become: yes
 
   roles:
     - nvm

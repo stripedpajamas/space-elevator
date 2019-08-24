@@ -1,0 +1,30 @@
+---
+- name: Create the EC2 security group
+  ec2_group:
+    name: "{{ aws_security_group }}"
+    description: Security group for Space Elevator
+    region: "{{ aws_region }}"
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+
+- name: Pause for fifteen seconds to ensure the EC2 security group has been created
+  pause:
+    seconds: 15
+
+- name: Open SSH in the EC2 security group
+  ec2_group:
+    name: "{{ aws_security_group }}"
+    description: Security group for Space Elevator
+    region: "{{ aws_region }}"
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    rules:
+      - proto: tcp
+        from_port: "22"
+        to_port: "22"
+        cidr_ip: 0.0.0.0/0
+    rules_egress:
+      - proto: all
+        from_port: 1
+        to_port: 65535
+        cidr_ip: 0.0.0.0/0
