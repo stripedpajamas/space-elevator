@@ -11,6 +11,6 @@
     export NVM_DIR="$HOME/.nvm";
     . $NVM_DIR/nvm.sh;
     nvm install v10.16.3;
-    npm install -g ssb-server;
+    npm install -g ssb-server@^14;
   args:
     executable: "/bin/bash"

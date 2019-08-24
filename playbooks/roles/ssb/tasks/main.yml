@@ -21,4 +21,32 @@
     group: root
     mode: 0644
   become: yes
-  notify: Restart SSB
+
+- name: Start the SSB service
+  shell: >
+    systemctl start ssb
+  args:
+    executable: "/bin/bash"
+  become: yes
+
+- name: Wait 5 seconds for the service to come up
+  pause:
+    seconds: 5
+
+- name: Install SSB plugins
+  shell: >
+    export NVM_DIR="$HOME/.nvm";
+    . $NVM_DIR/nvm.sh;
+    for pkg in {ssb-about,ssb-backlinks,ssb-unread,ssb-suggest,ssb-search,ssb-chess-db,ssb-private,ssb-meme,ssb-tags,ssb-identities,ssb-names};
+      do ssb-server --host localhost plugins.install $pkg;
+    done;
+  args:
+    executable: "/bin/bash"
+
+- name: Restart SSB service to enable plugins
+  shell: >
+    systemctl restart ssb
+  args:
+    executable: "/bin/bash"
+  become: yes
+
