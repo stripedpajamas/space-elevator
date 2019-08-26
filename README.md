@@ -8,7 +8,7 @@ space elevator sets up a remote server that acts as your SSB identity. this allo
 - only computer is provided by work and don't want to (aren't allowed) to install SSB
 
 ## usage
-before anything, you need to have `git`, `pip`, and `python` (2.7)
+before anything, you need to have `git`, `nvm` (node version manager), `pip`, and `python` (2.7)
 
 you also need your ssh key present in `~/.ssh/id_rsa.pub`.
 

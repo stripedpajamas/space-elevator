@@ -16,7 +16,7 @@ function provision () {
 }
 
 function patchbay () {
-  console.error('Unimplemented')
+  spawn('./patchbay', { stdio: 'inherit' })
 }
 
 async function main () {

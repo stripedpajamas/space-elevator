@@ -89,6 +89,9 @@
     ansible_user: ubuntu
     ansible_become: yes
 
+- name: Keep track of server IP for later
+  local_action: copy content={{ instance_eip.public_ip }} dest=~/.space-elevator/ip
+
 - name: Set the space_ipv4_address variable
   set_fact:
     space_ipv4_address: "{{ instance_eip.public_ip }}"

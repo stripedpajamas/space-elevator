@@ -1,0 +1,63 @@
+#!/bin/bash
+
+# exit on errors
+set -e
+
+# kill ssh tunnel when exiting
+trap "exit" INT TERM ERR
+trap "kill 0" EXIT
+
+if [[ ! -e "$HOME/.nvm/nvm.sh" ]]; then
+  echo "nvm command not found; need nvm to contiue."
+  exit 1
+fi
+
+. "$HOME/.nvm/nvm.sh"
+nvm install 10
+
+if [[ ! -d "$HOME/.space-elevator" ]] || [[ ! -e "$HOME/.space-elevator/ip" ]]; then
+  echo "Space Elevator not provisioned; run `provision` command first."
+  exit 1
+fi
+
+if [[ -d "$HOME/.ssb" ]]; then
+  # backup any .ssb garbage present
+  mv "$HOME/.ssb" "$HOME/.ssb.old"
+else
+  mkdir -p "$HOME/.ssb"
+fi
+
+IP=`cat "$HOME/.space-elevator/ip"`
+
+# copy manifest.json and secret locally
+scp "spaceman@$IP":"/home/spaceman/.ssb/{manifest.json,secret}" "$HOME/.ssb/"
+
+# modify patchbay/config
+if [[ ! -d "$HOME/.space-elevator/patchbay" ]]; then
+  mkdir -p "$HOME/.space-elevator"
+  git clone https://github.com/ssbc/patchbay "$HOME/.space-elevator/patchbay"
+  pushd "$HOME/.space-elevator/patchbay"
+  npm i
+else
+  pushd "$HOME/.space-elevator/patchbay"
+fi
+
+git checkout -- . # return everything to defaults
+git pull origin master # update code
+
+# a known good state
+git checkout 4d1001442a68d2f9cb1521459e02e3587f312ebf
+
+# ssh tunnel
+ssh -NL 8008:localhost:8008 "spaceman@$IP" &
+
+# run it
+echo "Starting Patchbay..."
+npm run lite > /dev/null 2>&1
+popd
+
+# restore backup if we made one
+if [[ -d "$HOME/.ssb.old" ]]; then
+  rm -rf "$HOME/.ssb"
+  mv "$HOME/.ssb.old" "$HOME/.ssb"
+fi

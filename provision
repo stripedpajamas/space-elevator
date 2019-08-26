@@ -89,6 +89,6 @@ You can access the server directly with this command:
 
 To launch Patchbay or another SSB app, use this command:
 
-  npx snel patchbay
+  npx spel patchbay
 
 "
