@@ -4,7 +4,10 @@
 # ========================================================
   hosts: spacehost
   remote_user: "spaceman"
-  become: yes
+
+  vars:
+    ansible_user: "spaceman"
+    ansible_become: no
 
   roles:
     - nvm

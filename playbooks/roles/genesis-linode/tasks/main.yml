@@ -1,6 +1,6 @@
 ---
-- name: "Get the {{ ssh_private_key }}.pub contents"
-  command: "cat {{ ssh_private_key }}.pub"
+- name: "Get the ~/.ssh/id_rsa.pub contents"
+  command: "cat ~/.ssh/id_rsa.pub"
   register: ssh_key
   changed_when: False
 

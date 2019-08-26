@@ -13,6 +13,10 @@
     group: spaceman
     mode: 0777
 
+- name: Turn on root access for service creation
+  set_fact:
+    ansible_become: yes
+
 - name: Install SSB as a system service
   copy:
     src: ssb.service
@@ -21,6 +25,7 @@
     group: root
     mode: 0644
   become: yes
+  become_user: root
 
 - name: Start the SSB service
   shell: >
@@ -28,6 +33,11 @@
   args:
     executable: "/bin/bash"
   become: yes
+  become_user: root
+
+- name: Turn off root access for plugin installation
+  set_fact:
+    ansible_become: no
 
 - name: Wait 5 seconds for the service to come up
   pause:
@@ -43,10 +53,15 @@
   args:
     executable: "/bin/bash"
 
+- name: Turn on root access for service restarting
+  set_fact:
+    ansible_become: yes
+
 - name: Restart SSB service to enable plugins
   shell: >
     systemctl restart ssb
   args:
     executable: "/bin/bash"
   become: yes
+  become_user: root
 

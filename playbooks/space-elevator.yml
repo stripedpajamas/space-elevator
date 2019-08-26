@@ -1,6 +1,4 @@
 ---
-- import_playbook: python.yml
-
 - name: Configure the Server and install required software
 # ========================================================
   hosts: spacehost

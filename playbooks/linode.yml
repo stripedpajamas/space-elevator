@@ -1,7 +1,7 @@
 ---
 - name: Provision the Linode Server
 # =================================
-  hosts: localhost
+  hosts: localhosts
   connection: local
   gather_facts: yes
 

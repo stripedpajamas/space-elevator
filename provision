@@ -12,24 +12,8 @@ export ANSIBLE_LIBRARY=
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd -P)"
 
-DEFAULT_SITE_VARS="$SCRIPT_DIR/global_vars/default-site.yml"
-GLOBAL_VARS="$SCRIPT_DIR/global_vars/globals.yml"
-HOME_DIR="$HOME/.space-elevator"
-SITE_VARS="$HOME_DIR/site.yml"
-
 # Include the check_ansible function from ansible_check.sh
 source util/ansible_check.sh
-
-function init_homedir() {
-  if [ ! -d "$HOME_DIR" ]; then
-    mkdir "$HOME_DIR"
-    echo "Created new Space Elevator home directory: $HOME_DIR"
-  fi
-  if [ ! -f "$SITE_VARS" ]; then
-    cp "$DEFAULT_SITE_VARS" "$SITE_VARS"
-    echo "Created new Space Elevator site vars file: $SITE_VARS"
-  fi
-}
 
 # check_python checks whether the 'python' interpreter is Python 2 or Python 3.
 # If it is Python 2 then the inventory file is updated to set the
@@ -59,16 +43,12 @@ function run_genesis() {
   fi
   
   # Run the specified genesis playbook with the specified Ansible inventory
-  echo; echo; ansible-playbook -vv \
+  echo; echo; ansible-playbook -vvvv \
     -i inventories/inventory \
-    --extra-vars="@$GLOBAL_VARS" \
-    --extra-vars="@$DEFAULT_SITE_VARS" \
-    --extra-vars="@$SITE_VARS" \
     $ASK_BECOME \
     "playbooks/$GENESIS_PLAYBOOK"
 }
 
-init_homedir
 check_python
 check_ansible
 

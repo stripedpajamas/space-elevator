@@ -1,7 +1,7 @@
 ---
 - name: Provision the EC2 Server
 # ==============================
-  hosts: localhost
+  hosts: localhosts
   connection: local
   gather_facts: yes
 
@@ -82,7 +82,6 @@
 - import_playbook: ssh-setup.yml
 - import_playbook: cloud-status.yml
 - import_playbook: python.yml
-- import_playbook: ec2-metadata-instance.yml
 - import_playbook: space-elevator.yml
 - import_playbook: ssb-setup.yml
 ...

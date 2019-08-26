@@ -1,8 +1,0 @@
----
-# Site specific configuration.
-#
-
-# The SSH private key that Ansible will use to connect to the remote server.
-# The associated public key will be used if required when provisioning cloud
-# nodes for the authorized_keys file.
-ssh_private_key: "~/.ssh/id_rsa"
