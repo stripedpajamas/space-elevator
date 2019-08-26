@@ -23,9 +23,9 @@ fi
 if [[ -d "$HOME/.ssb" ]]; then
   # backup any .ssb garbage present
   mv "$HOME/.ssb" "$HOME/.ssb.old"
-else
-  mkdir -p "$HOME/.ssb"
 fi
+
+mkdir -p "$HOME/.ssb"
 
 IP=`cat "$HOME/.space-elevator/ip"`
 
