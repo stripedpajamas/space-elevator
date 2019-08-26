@@ -26,14 +26,23 @@ after it's done, you can access your server with:
 ssh spaceman@<public ip>
 ```
 
-and you can run a support ssb app (like patchbay) with this command:
+the public IP of the server is saved in `~/.space-elevator/ip`.
+
+and you can run a supported ssb app (like patchbay) with this command:
 
 ```shell
 npx spel patchbay
 ```
 
+### supported cloud providers
+- amazon
+- linode
+
 ### supported ssb apps
 - patchbay
+
+## cleanup
+if you want to delete local remnants of a provisioning, run `npx spel cleanup`. this will not delete entities in the cloud -- that has to be done manually.
 
 ## license
 MIT

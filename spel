@@ -19,6 +19,10 @@ function patchbay () {
   spawn('./patchbay', { stdio: 'inherit' })
 }
 
+function cleanup () {
+  spawn('./cleanup', { stdio: 'inherit' })
+}
+
 async function main () {
   const cmd = process.argv[2]
   switch (cmd) {
@@ -27,6 +31,9 @@ async function main () {
       break
     case 'patchbay':
       patchbay()
+      break
+    case 'cleanup':
+      cleanup()
       break
     default:
       help()

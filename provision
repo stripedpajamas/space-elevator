@@ -81,11 +81,14 @@ rm -rf venv
 
 deactivate
 
+IP=`cat "$HOME/.space-elevator/ip"`
+[ ! -z "$IP" ] && ip="$IP" || ip="<public ip>"
+
 echo "
 
 You can access the server directly with this command:
 
-  ssh spaceman@<public ip>
+  ssh spaceman@${ip}
 
 To launch Patchbay or another SSB app, use this command:
 

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# exit on errors
+set -e
+
+if [[ -d "$HOME/.space-elevator" ]]; then
+  rm -rf "$HOME/.space-elevator"
+fi
+
+echo "Local Space Elevator files deleted."
