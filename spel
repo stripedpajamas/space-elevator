@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-const os = require('os')
 const path = require('path')
 const { spawn } = require('child_process')
 
@@ -9,15 +8,15 @@ function help () {
 }
 
 function provision () {
-  spawn(path.join(__dirname, 'provision'), { stdio: 'inherit' })
+  spawn(path.join(__dirname, 'provision'), { stdio: 'inherit', cwd: __dirname })
 }
 
 function patchbay () {
-  spawn(path.join(__dirname, 'patchbay'), { stdio: 'inherit' })
+  spawn(path.join(__dirname, 'patchbay'), { stdio: 'inherit', cwd: __dirname })
 }
 
 function cleanup () {
-  spawn(path.join(__dirname, 'cleanup'), { stdio: 'inherit' })
+  spawn(path.join(__dirname, 'cleanup'), { stdio: 'inherit', cwd: __dirname })
 }
 
 async function main () {
