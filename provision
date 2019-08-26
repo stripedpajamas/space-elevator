@@ -7,6 +7,9 @@ set -e
 ./util/venv-dependencies.sh ./venv
 source ./venv/bin/activate
 
+mkdir -p "$HOME/.space-elevator"
+
+clear
 echo -e "\n\033[38;5;255m\033[48;5;234m\033[1m  S P A C E  E L E V A T O R  \033[0m\n"
 
 # This is where Ansible looks for local modules. Disable it, in the
