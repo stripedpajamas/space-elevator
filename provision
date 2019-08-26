@@ -43,7 +43,7 @@ function run_genesis() {
   fi
   
   # Run the specified genesis playbook with the specified Ansible inventory
-  echo; echo; ansible-playbook -vvvv \
+  echo; echo; ansible-playbook \
     -i inventories/inventory \
     $ASK_BECOME \
     "playbooks/$GENESIS_PLAYBOOK"
@@ -55,19 +55,20 @@ check_ansible
 # Figure out which genesis role to invoke
 read -r -p "Which provider are you using?
   1. Amazon
-  2. Azure
-  3. DigitalOcean
-  4. Google
-  5. Linode
-  6. Rackspace
+  2. Linode 
 : " reply
+
+#2. Azure
+#3. DigitalOcean
+#4. Google
+#6. Rackspace
 
 case "$reply" in
   1) run_genesis amazon.yml;;
-  2) run_genesis azure.yml;;
-  3) run_genesis digitalocean.yml;;
-  4) run_genesis google.yml;;
-  5) run_genesis linode.yml;;
-  6) run_genesis rackspace.yml;;
+  # 2) run_genesis azure.yml;;
+  # 3) run_genesis digitalocean.yml;;
+  # 4) run_genesis google.yml;;
+  2) run_genesis linode.yml;;
+  # 6) run_genesis rackspace.yml;;
   *) echo; echo "Invalid provider selected."; exit 1;;
 esac
