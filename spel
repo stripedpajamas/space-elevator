@@ -4,23 +4,20 @@ const os = require('os')
 const path = require('path')
 const { spawn } = require('child_process')
 
-const CONFIG_DIR = '.space-elevator'
-const CONFIG_PATH = path.join(os.homedir(), CONFIG_DIR)
-
 function help () {
   console.log('Usage: spel <provision|patchbay>')
 }
 
 function provision () {
-  spawn('./provision', { stdio: 'inherit' })
+  spawn(path.join(__dirname, 'provision'), { stdio: 'inherit' })
 }
 
 function patchbay () {
-  spawn('./patchbay', { stdio: 'inherit' })
+  spawn(path.join(__dirname, 'patchbay'), { stdio: 'inherit' })
 }
 
 function cleanup () {
-  spawn('./cleanup', { stdio: 'inherit' })
+  spawn(path.join(__dirname, 'cleanup'), { stdio: 'inherit' })
 }
 
 async function main () {
