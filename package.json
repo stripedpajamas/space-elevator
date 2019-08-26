@@ -1,0 +1,10 @@
+{
+  "name": "spel",
+  "version": "0.0.1",
+  "bin": "spel",
+  "author": {
+    "name": "Peter Squicciarini",
+    "email": "stripedpajamas273@gmail.com"
+  },
+  "license": "MIT"
+}

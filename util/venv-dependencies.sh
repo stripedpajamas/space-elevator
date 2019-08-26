@@ -7,9 +7,7 @@ set -e
 #
 # See the usage function below.
 
-# quiet=--quiet
-# pip makes a lot of noise when installing. Uncomment the following
-# line to make it a little louder.
+# set to --quiet to quiet down pip
 quiet=
 
 #### Options end here.
@@ -238,17 +236,3 @@ hash -r
 
 # Now we can install all the Python modules.
 our_pip_install -r requirements.txt
-
-echo "
-*************
-
-All dependencies installed into $1. To use this environment, run this
-in your shell:
-
-    source \"$1/bin/activate\"
-
-You need to do this once in every terminal window you plan to run the
-command './provision' in.
-
-After you've run that, you're ready to run ./provision.
-"

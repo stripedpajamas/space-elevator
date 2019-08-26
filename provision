@@ -4,6 +4,9 @@
 # Set errexit option to exit immediately on any non-zero status return
 set -e
 
+./util/venv-dependencies.sh ./venv
+source ./venv/bin/activate
+
 echo -e "\n\033[38;5;255m\033[48;5;234m\033[1m  S P A C E  E L E V A T O R  \033[0m\n"
 
 # This is where Ansible looks for local modules. Disable it, in the
@@ -72,3 +75,20 @@ case "$reply" in
   # 6) run_genesis rackspace.yml;;
   *) echo; echo "Invalid provider selected."; exit 1;;
 esac
+
+# Cleaning up
+rm -rf venv
+
+deactivate
+
+echo "
+
+You can access the server directly with this command:
+
+  ssh spaceman@<public ip>
+
+To launch Patchbay or another SSB app, use this command:
+
+  npx snel patchbay
+
+"
