@@ -3,6 +3,13 @@
 # exit on errors
 set -e
 
+# remove the known host from ssh
+if [[ -e "$HOME/.space-elevator/ip" ]]; then
+  ssh-keygen -R `cat "$HOME/.space-elevator/ip"`
+fi
+
+# toast the config dir
+echo "Deleting cloned SSB apps..."
 if [[ -d "$HOME/.space-elevator" ]]; then
   rm -rf "$HOME/.space-elevator"
 fi
