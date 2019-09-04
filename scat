@@ -23,7 +23,7 @@ git checkout -- . # return everything to defaults
 git pull origin master # update code
 
 # a known good state
-git checkout 6aa00b830e23da6e572ac1ac350e8c0375d272ec
+git checkout v1.7.4
 
 # ssh tunnel
 ssh -NL 8008:localhost:8008 "spaceman@$IP" &
