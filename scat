@@ -3,12 +3,16 @@
 # exit on errors
 set -e
 
+runpost() {
+  popd
+  . scripts/post.sh
+}
+
 # kill ssh tunnel when exiting
 trap "exit" INT TERM ERR
-trap "kill 0" EXIT
+trap "runpost; kill 0" EXIT
 
 . scripts/pre.sh
-
 
 if [[ ! -d "$HOME/.space-elevator/scat" ]]; then
   mkdir -p "$HOME/.space-elevator"
@@ -19,18 +23,14 @@ else
   pushd "$HOME/.space-elevator/scat"
 fi
 
-git checkout -- . # return everything to defaults
-git pull origin master # update code
-
 # a known good state
+git fetch
 git checkout v1.7.4
+git checkout -- . # return everything to defaults
 
 # ssh tunnel
 ssh -NL 8008:localhost:8008 "spaceman@$IP" &
 
 # run it
 echo "Starting Scat..."
-npm start
-popd
-
-. scripts/post.sh
+npm start -- "$@"

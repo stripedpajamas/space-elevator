@@ -3,9 +3,14 @@
 # exit on errors
 set -e
 
+runpost() {
+  popd
+  . scripts/post.sh
+}
+
 # kill ssh tunnel when exiting
 trap "exit" INT TERM ERR
-trap "kill 0" EXIT
+trap "runpost; kill 0" EXIT
 
 . scripts/pre.sh
 
@@ -21,18 +26,15 @@ else
   pushd "$HOME/.space-elevator/patchbay"
 fi
 
-git checkout -- . # return everything to defaults
-git pull origin master # update code
 
 # a known good state
+git fetch
 git checkout 4d1001442a68d2f9cb1521459e02e3587f312ebf
+git checkout -- . # return everything to defaults
 
-# ssh tunnel
-ssh -NL 8008:localhost:8008 "spaceman@$IP" &
+# ssh tunnel ssb stuff AND blobs
+ssh -NL 8008:localhost:8008 -L 8989:localhost:8989 "spaceman@$IP" &
 
 # run it
 echo "Starting Patchbay..."
 npm run lite > /dev/null 2>&1
-popd
-
-. scripts/post.sh
