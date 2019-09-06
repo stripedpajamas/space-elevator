@@ -37,4 +37,4 @@ ssh -NL 8008:localhost:8008 -L 8989:localhost:8989 "spaceman@$IP" &
 
 # run it
 echo "Starting Patchbay..."
-npm run lite > /dev/null 2>&1
+npm run lite -- --host localhost > /dev/null 2>&1

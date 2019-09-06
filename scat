@@ -33,4 +33,4 @@ ssh -NL 8008:localhost:8008 "spaceman@$IP" &
 
 # run it
 echo "Starting Scat..."
-npm start -- "$@"
+npm start -- "$@" --host localhost
