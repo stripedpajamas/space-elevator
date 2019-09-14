@@ -3,47 +3,26 @@
 const path = require('path')
 const { spawn } = require('child_process')
 
+const supported = new Set([
+  'provision',
+  'patchbay',
+  'scat',
+  'oasis',
+  'cleanup'
+])
 const args = [...process.argv].slice(3)
 
 function help () {
-  console.log('Usage: spel <provision|patchbay|scat>')
-}
-
-function provision () {
-  spawn(path.join(__dirname, 'provision'), args, { stdio: 'inherit', cwd: __dirname })
-}
-
-function patchbay () {
-  spawn(path.join(__dirname, 'patchbay'), args, { stdio: 'inherit', cwd: __dirname })
-}
-
-function scat () {
-  spawn(path.join(__dirname, 'scat'), args, { stdio: 'inherit', cwd: __dirname })
-}
-
-function cleanup () {
-  spawn(path.join(__dirname, 'cleanup'), args, { stdio: 'inherit', cwd: __dirname })
+  console.log('Usage: spel <provision|patchbay|oasis|scat>')
 }
 
 async function main () {
   const cmd = process.argv[2]
-  switch (cmd) {
-    case 'provision':
-      provision()
-      break
-    case 'patchbay':
-      patchbay()
-      break
-    case 'scat':
-      scat()
-      break
-    case 'cleanup':
-      cleanup()
-      break
-    default:
-      help()
-      break
+  console.log({cmd,supported})
+  if (!supported.has(cmd)) {
+    return help()
   }
+  spawn(path.join(__dirname, cmd), args, { stdio: 'inherit', cwd: __dirname })
 }
 
 main()
