@@ -20,7 +20,15 @@ npx spel provision
 
 it will ask about what platform to setup on and necessary auth keys, etc.
 
-after it's done, you can access your server with:
+after it's done, you can run a supported ssb app (like patchbay) with this command:
+
+```shell
+npx spel <appname>
+```
+
+(see below for support apps). after you exit the SSB app, space elevator deletes the local ~/.ssb folder, but keeps the app files for quicker startup next run.
+
+for debugging purposes, you can access your server with:
 
 ```shell
 ssh spaceman@<public ip>
@@ -28,21 +36,15 @@ ssh spaceman@<public ip>
 
 the public IP of the server is saved in `~/.space-elevator/ip`.
 
-and you can run a supported ssb app (like patchbay or scat) with this command:
-
-```shell
-npx spel patchbay
-
-npx spel scat
-```
 
 ### supported cloud providers
 - amazon
 - linode
 
 ### supported ssb apps
-- patchbay
-- scat (ssb-chat)
+- [patchbay](https://github.com/ssbc/patchbay)
+- [oasis](https://github.com/fraction/oasis)
+- [scat](https://github.com/stripedpajamas/scat)
 
 ## cleanup
 if you want to delete local remnants of a provisioning, run `npx spel cleanup`. this will not delete entities in the cloud -- that has to be done manually.
