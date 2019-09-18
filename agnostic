@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# exit on errors
+set -e
+
+runpost() {
+  . scripts/post.sh
+}
+
+# kill ssh tunnel when exiting
+trap "exit" INT TERM ERR
+trap "runpost; kill 0" EXIT
+
+. scripts/pre.sh
+
+# ssh tunnel ssb stuff AND blobs
+ssh -NL 8008:localhost:8008 -L 8989:localhost:8989 "spaceman@$IP" &
+
+read -p "Run an SSB app; press any key when done..." -n1 -s

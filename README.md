@@ -49,5 +49,15 @@ the public IP of the server is saved in `~/.space-elevator/ip`.
 ## cleanup
 if you want to delete local remnants of a provisioning, run `npx spel cleanup`. this will not delete entities in the cloud -- that has to be done manually.
 
+## agnostic
+mostly for testing purposes, `npx spel agnostic` is also a valid command (after provisioning), which does the following:
+
+- copy down secret and manifest.json from space elevator
+- establish SSH tunnel on 8008 and 8989 (blobs) to space elevator
+- wait for user input to close
+- on close, terminates the SSH tunnel and deletes the local secret and manifest files
+
+this way you could potentially spin up an unsupported app and it should connect properly to the space elevator ssb instance on 8008. 
+
 ## license
 MIT
