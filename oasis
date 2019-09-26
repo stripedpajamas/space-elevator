@@ -20,7 +20,7 @@ if [[ ! -d "$HOME/.space-elevator/oasis" ]]; then
   git clone https://github.com/fraction/oasis.git "$HOME/.space-elevator/oasis"
   pushd "$HOME/.space-elevator/oasis"
   # a known good state
-  git checkout 100dd781f2973430618d812d9bc9be88b39f021c
+  git checkout 6de454e36f2e30e854a42e4024fe3a7cc936cdf6
   npm i
 else
   pushd "$HOME/.space-elevator/oasis"
@@ -29,7 +29,7 @@ fi
 
 # a known good state
 git fetch
-git checkout 100dd781f2973430618d812d9bc9be88b39f021c
+git checkout 6de454e36f2e30e854a42e4024fe3a7cc936cdf6
 git checkout -- . # return everything to defaults
 
 # ssh tunnel ssb stuff AND blobs
