@@ -17,16 +17,12 @@ trap "runpost; kill 0" EXIT
 if [[ ! -d "$HOME/.space-elevator/scat" ]]; then
   mkdir -p "$HOME/.space-elevator"
   git clone https://github.com/stripedpajamas/scat "$HOME/.space-elevator/scat"
-  pushd "$HOME/.space-elevator/scat"
-  npm i
-else
-  pushd "$HOME/.space-elevator/scat"
+  fresh=1
 fi
+pushd "$HOME/.space-elevator/scat"
 
 # a known good state
-git fetch
-git checkout v1.7.4
-git checkout -- . # return everything to defaults
+. "$MAIN_DIR/scripts/settle.sh" "1aeeea1" "$fresh"
 
 # ssh tunnel
 ssh -NL 8008:localhost:8008 "spaceman@$IP" &

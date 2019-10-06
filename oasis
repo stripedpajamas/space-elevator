@@ -18,19 +18,13 @@ trap "runpost; kill 0" EXIT
 if [[ ! -d "$HOME/.space-elevator/oasis" ]]; then
   mkdir -p "$HOME/.space-elevator"
   git clone https://github.com/fraction/oasis.git "$HOME/.space-elevator/oasis"
-  pushd "$HOME/.space-elevator/oasis"
-  # a known good state
-  git checkout 6de454e36f2e30e854a42e4024fe3a7cc936cdf6
-  npm i
-else
-  pushd "$HOME/.space-elevator/oasis"
+  fresh=1
 fi
 
+pushd "$HOME/.space-elevator/oasis"
 
 # a known good state
-git fetch
-git checkout 6de454e36f2e30e854a42e4024fe3a7cc936cdf6
-git checkout -- . # return everything to defaults
+. "$MAIN_DIR/scripts/settle.sh" "fc33705" "$fresh"
 
 # ssh tunnel ssb stuff AND blobs
 ssh -NL 8008:localhost:8008 -L 8989:localhost:8989 "spaceman@$IP" &

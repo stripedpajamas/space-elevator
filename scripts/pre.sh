@@ -28,3 +28,5 @@ IP=`cat "$HOME/.space-elevator/ip"`
 
 # copy manifest.json and secret locally
 scp "spaceman@$IP":"/home/spaceman/.ssb/{manifest.json,secret}" "$HOME/.ssb/"
+
+MAIN_DIR=`pwd`
